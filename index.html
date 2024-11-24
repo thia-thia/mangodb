@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="patientApp">
+<head>
+    <title>Patient Management System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-controller="PatientController">
+    <h1>Patient Management System</h1>
+
+    <!-- Add Patient Form -->
+    <form ng-submit="addPatient()">
+        <label>Name:</label>
+        <input type="text" ng-model="newPatient.name" required>
+        <label>Age:</label>
+        <input type="number" ng-model="newPatient.age" required>
+        <label>Date:</label>
+        <input type="date" ng-model="newPatient.date" required>
+        <button type="submit">Add Patient</button>
+    </form>
+
+    <br>
+
+    <!-- Search and Sort -->
+    <label>Search:</label>
+    <input type="text" ng-model="searchQuery" ng-change="fetchPatients()">
+
+    <label>Sort By:</label>
+    <select ng-model="sortOption" ng-change="fetchPatients()">
+        <option value="age">Age</option>
+        <option value="date">Date</option>
+    </select>
+
+    <!-- Patient List -->
+    <h2>Patient List</h2>
+    <ul>
+        <li ng-repeat="patient in patients">
+            {{ patient.name }} - {{ patient.age }} - {{ patient.date | date:'shortDate' }}
+        </li>
+    </ul>
+</body>
+</html>
